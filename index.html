@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELYRA Skin — Inspired by Guimaras Mangoes</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Reenie+Beanie&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              yellow: '#E5C138',      // Guimaras Golden Mango Yellow
+              yellowHover: '#D4B02A',
+              lightYellow: '#FFF9D6',
+              bg: '#F2F1ED',           // Rhode signature light off-white background
+              cardBg: '#EBEAE5',       // Slightly darker grey-tone card
+              dark: '#1C1C1C',
+              greyText: '#6E6E6B',
+              greyBorder: '#D8D7D2'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            signature: ['Reenie Beanie', 'cursive'],
+            serif: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F2F1ED;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D8D7D2;
+      border-radius: 3px;
+    }
+    
+    /* Bubble Font / Bold Yellow Logo Style to match provided image */
+    .elyra-logo {
+      color: #E5C138;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      text-shadow: 0px 1px 1px rgba(0,0,0,0.05);
+    }
+
+    .mango-leaf-badge {
+      display: inline-block;
+      position: relative;
+    }
+
+    /* Modal Backdrop Blur */
+    .backdrop-blur-custom {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+  </style>
+</head>
+<body class="bg-brand-bg text-brand-dark font-sans antialiased selection:bg-brand-yellow selection:text-white min-h-screen flex flex-col justify-between">
+
+  <!-- TOP BANNER -->
+  <div class="bg-[#EAE8E3] text-[#555] text-xs font-semibold uppercase tracking-widest text-center py-2 px-4 border-b border-brand-greyBorder sticky top-0 z-50">
+    <div class="flex items-center justify-center space-x-2">
+      <span>FREE SHIPPING OVER ₱500</span>
+      <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-yellow"></span>
+      <span class="text-[10px] lowercase text-gray-500 font-normal">automatically applied at checkout</span>
+    </div>
+  </div>
+
+  <!-- HEADER / NAVBAR -->
+  <header class="bg-brand-bg/90 backdrop-blur-md sticky top-[33px] z-40 border-b border-brand-greyBorder px-4 lg:px-12 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- NAV TABS (LEFT) -->
+      <nav class="flex items-center space-x-6 text-sm font-bold tracking-wider uppercase">
+        <button onclick="switchTab('shop')" id="nav-shop" class="nav-btn text-brand-dark border-b-2 border-brand-yellow pb-0.5 transition-all">SHOP</button>
+        <button onclick="switchTab('about')" id="nav-about" class="nav-btn text-brand-greyText hover:text-brand-dark border-b-2 border-transparent pb-0.5 transition-all">ABOUT</button>
+        <button onclick="switchTab('account')" id="nav-account" class="nav-btn text-brand-greyText hover:text-brand-dark border-b-2 border-transparent pb-0.5 transition-all">ACCOUNT</button>
+      </nav>
+
+      <!-- BRAND LOGO (CENTER) -->
+      <div onclick="switchTab('shop')" class="cursor-pointer flex items-center space-x-1">
+        <span class="elyra-logo text-2xl lg:text-3xl uppercase tracking-wider">ELYRA Skin</span>
+        <!-- Mango Icon -->
+        <svg class="w-6 h-6 text-brand-yellow fill-current" viewBox="0 0 24 24">
+          <path d="M12 2C8.5 2 5 4.5 4 8.5c-1 4 0 9 4 11.5 4 2.5 9 2 11.5-2s2-9-1.5-12C16.5 3.5 14 2 12 2zm3.5 6.5c0 1.5-1.2 2.7-2.7 2.7s-2.7-1.2-2.7-2.7 1.2-2.7 2.7-2.7 2.7 1.2 2.7 2.7z" opacity="0.3"/>
+          <path d="M17.5 4.5C15.5 2.5 13 2 11 2c-3.5 0-6 2.5-7 6.5-1 4 0 8.5 4 11 3.5 2.2 8 1.8 10.5-1.5 2.5-3.3 2.2-8.5-.5-11.5zM12 18c-3.3 0-6-2.7-6-6 0-.8.2-1.5.5-2.2.8 1.8 2.6 3.2 4.7 3.2 2.8 0 5-2.2 5-5 0-.7-.1-1.4-.4-2 2.3.9 3.8 3.2 3.8 6 0 3.3-2.7 6-6 6z"/>
+        </svg>
+      </div>
+
+      <!-- CART TRIGGER (RIGHT) -->
+      <div class="flex items-center space-x-4">
+        <button onclick="toggleCart()" class="relative p-2 text-brand-dark hover:text-brand-yellow transition-colors">
+          <i class="fa-solid fa-bag-shopping text-xl"></i>
+          <span id="cart-count" class="absolute -top-1 -right-1 bg-brand-yellow text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-grow max-w-7xl w-full mx-auto px-4 lg:px-8 py-6 space-y-12">
+
+    <!-- ================================================================= -->
+    <!-- TAB 1: SHOP SECTION (Main Landing View) -->
+    <!-- ================================================================= -->
+    <div id="tab-content-shop" class="tab-pane space-y-12">
+      
+      <!-- HERO BANNER (Direct Reference to Image 1) -->
+      <section class="relative rounded-2xl overflow-hidden shadow-sm border border-brand-greyBorder bg-[#D4D3CE]">
+        <div class="relative w-full h-[420px] md:h-[520px] bg-cover bg-center flex items-center justify-center" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80');">
+          <!-- Monochrome Overlay for Rhode High-Fashion Aesthetic -->
+          <div class="absolute inset-0 bg-stone-900/40 backdrop-grayscale mix-blend-multiply"></div>
+          
+          <!-- Pop Yellow Content Layer -->
+          <div class="relative z-10 text-center px-4 max-w-2xl mx-auto flex flex-col items-center">
+            
+            <!-- Giant ELYRA Skin Header -->
+            <div class="flex items-center justify-center space-x-2 mb-2">
+              <h1 class="elyra-logo text-5xl md:text-7xl lg:text-8xl tracking-tight">ELYRA Skin</h1>
+              <span class="text-brand-yellow text-4xl md:text-6xl">🥭</span>
+            </div>
+
+            <p class="text-brand-yellow text-lg md:text-2xl font-medium tracking-wide mb-6 drop-shadow-md">
+              welcome to the world of ELYRA skin
+            </p>
+
+            <button onclick="scrollToProducts()" class="bg-brand-yellow hover:bg-brand-yellowHover text-white font-bold px-8 py-3 rounded-xl text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all">
+              Get in!
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- A NOTE FROM LEMUEL SECTION (Direct Reference to Image 1) -->
+      <section class="bg-brand-cardBg rounded-2xl p-8 md:p-12 border border-brand-greyBorder shadow-sm max-w-4xl mx-auto text-center relative overflow-hidden">
+        <div class="max-w-2xl mx-auto space-y-6">
+          <h2 class="text-brand-yellow font-extrabold text-xl md:text-2xl tracking-widest uppercase">
+            A NOTE FROM LEMUEL
+          </h2>
+          
+          <p class="text-brand-greyText text-base md:text-lg leading-relaxed font-normal">
+            "Our skincare products harness the vitamin-rich, hydrating power of authentic Guimaras mangoes, directly and ethically sourced from local Filipino farmers. Through fair-trade partnerships, we ensure sustainable livelihoods for our farming families, transforming every product into a gentle beauty essential that nourishes your skin while empowering our community."
+          </p>
+
+          <div class="pt-2 flex flex-col items-center justify-center">
+            <span class="font-signature text-4xl md:text-5xl text-brand-yellow transform -rotate-3">
+              to Lemuel
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRODUCTS GRID SECTION -->
+      <section id="products-section" class="space-y-8 scroll-mt-24">
+        <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-brand-greyBorder pb-4">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-bold tracking-tight text-brand-dark">The Guimaras Collection</h2>
+            <p class="text-brand-greyText text-sm mt-1">Gentle, tropical-climate formulations under ₱200.</p>
+          </div>
+          <div class="mt-4 md:mt-0 flex items-center space-x-2 text-xs font-semibold text-brand-greyText uppercase tracking-wider">
+            <span>4 Essentials</span>
+            <span>•</span>
+            <span>1 Complete Routine</span>
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <!-- PRODUCT 1: Facial Wash -->
+          <div class="bg-brand-cardBg rounded-2xl p-4 border border-brand-greyBorder flex flex-col justify-between group hover:shadow-md transition-all">
+            <div class="space-y-3">
+              <div class="relative bg-white/60 rounded-xl overflow-hidden aspect-square flex items-center justify-center p-6">
+                <span class="absolute top-2 left-2 bg-brand-yellow/20 text-brand-dark text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Step 1</span>
+                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=500&q=80" alt="Guimaras Cleansing Facial Wash" class="object-contain h-full w-full group-hover:scale-105 transition-transform duration-300">
+              </div>
+              <div>
+                <h3 class="font-bold text-lg text-brand-dark leading-tight">Guimaras Gentle Cleansing Facial Wash</h3>
+                <p class="text-xs text-brand-greyText mt-1">Sulfate-free gel cleanser infused with vitamin C mango extracts.</p>
+              </div>
+            </div>
+            <div class="pt-4 flex items-center justify-between border-t border-brand-greyBorder/60 mt-4">
+              <span class="font-extrabold text-lg text-brand-dark">₱149</span>
+              <button onclick="addToCart('Guimaras Gentle Cleansing Facial Wash', 149, 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=500&q=80')" class="bg-brand-dark text-white hover:bg-brand-yellow font-medium text-xs px-4 py-2 rounded-lg transition-colors">
+                Add to Bag
+              </button>
+            </div>
+          </div>
+
+          <!-- PRODUCT 2: Toner -->
+          <div class="bg-brand-cardBg rounded-2xl p-4 border border-brand-greyBorder flex flex-col justify-between group hover:shadow-md transition-all">
+            <div class="space-y-3">
+              <div class="relative bg-white/60 rounded-xl overflow-hidden aspect-square flex items-center justify-center p-6">
+                <span class="absolute top-2 left-2 bg-brand-yellow/20 text-brand-dark text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Step 2</span>
+                <img src="https://images.unsplash.com/photo-1608248597309-8b21c435520e?auto=format&fit=crop&w=500&q=80" alt="Guimaras Nectar Clarifying Toner" class="object-contain h-full w-full group-hover:scale-105 transition-transform duration-300">
+              </div>
+              <div>
+                <h3 class="font-bold text-lg text-brand-dark leading-tight">Guimaras Nectar Clarifying Toner</h3>
+                <p class="text-xs text-brand-greyText mt-1">Pore-refining balancing mist with AHA & mango fruit acids.</p>
+              </div>
+            </div>
+            <div class="pt-4 flex items-center justify-between border-t border-brand-greyBorder/60 mt-4">
+              <span class="font-extrabold text-lg text-brand-dark">₱169</span>
+              <button onclick="addToCart('Guimaras Nectar Clarifying Toner', 169, 'https://images.unsplash.com/photo-1608248597309-8b21c435520e?auto=format&fit=crop&w=500&q=80')" class="bg-brand-dark text-white hover:bg-brand-yellow font-medium text-xs px-4 py-2 rounded-lg transition-colors">
+                Add to Bag
+              </button>
+            </div>
+          </div>
+
+          <!-- PRODUCT 3: Moisturizer -->
+          <div class="bg-brand-cardBg rounded-2xl p-4 border border-brand-greyBorder flex flex-col justify-between group hover:shadow-md transition-all">
+            <div class="space-y-3">
+              <div class="relative bg-white/60 rounded-xl overflow-hidden aspect-square flex items-center justify-center p-6">
+                <span class="absolute top-2 left-2 bg-brand-yellow/20 text-brand-dark text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Step 3</span>
+                <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=500&q=80" alt="Dew Drop Weightless Moisturizer" class="object-contain h-full w-full group-hover:scale-105 transition-transform duration-300">
+              </div>
+              <div>
+                <h3 class="font-bold text-lg text-brand-dark leading-tight">Dew Drop Weightless Moisturizer</h3>
+                <p class="text-xs text-brand-greyText mt-1">Ultra-breathable gel-cream hydrator for high tropical humidity.</p>
+              </div>
+            </div>
+            <div class="pt-4 flex items-center justify-between border-t border-brand-greyBorder/60 mt-4">
+              <span class="font-extrabold text-lg text-brand-dark">₱179</span>
+              <button onclick="addToCart('Dew Drop Weightless Moisturizer', 179, 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=500&q=80')" class="bg-brand-dark text-white hover:bg-brand-yellow font-medium text-xs px-4 py-2 rounded-lg transition-colors">
+                Add to Bag
+              </button>
+            </div>
+          </div>
+
+          <!-- PRODUCT 4: Sunscreen -->
+          <div class="bg-brand-cardBg rounded-2xl p-4 border border-brand-greyBorder flex flex-col justify-between group hover:shadow-md transition-all">
+            <div class="space-y-3">
+              <div class="relative bg-white/60 rounded-xl overflow-hidden aspect-square flex items-center justify-center p-6">
+                <span class="absolute top-2 left-2 bg-brand-yellow/20 text-brand-dark text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Step 4</span>
+                <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=500&q=80" alt="Sunburst Invisible Sunscreen SPF 50+" class="object-contain h-full w-full group-hover:scale-105 transition-transform duration-300">
+              </div>
+              <div>
+                <h3 class="font-bold text-lg text-brand-dark leading-tight">Sunburst Invisible Sunscreen SPF 50+</h3>
+                <p class="text-xs text-brand-greyText mt-1">Zero white-cast, sweat-resistant daily UV shield PA++++.</p>
+              </div>
+            </div>
+            <div class="pt-4 flex items-center justify-between border-t border-brand-greyBorder/60 mt-4">
+              <span class="font-extrabold text-lg text-brand-dark">₱199</span>
+              <button onclick="addToCart('Sunburst Invisible Sunscreen SPF 50+', 199, 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=500&q=80')" class="bg-brand-dark text-white hover:bg-brand-yellow font-medium text-xs px-4 py-2 rounded-lg transition-colors">
+                Add to Bag
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- SPECIAL OFFER BUNDLE BANNER -->
+        <div class="bg-gradient-to-r from-brand-cardBg via-brand-lightYellow to-brand-cardBg rounded-2xl p-6 md:p-8 border border-brand-yellow/40 flex flex-col md:flex-row items-center justify-between gap-6 mt-8">
+          <div class="space-y-2">
+            <span class="bg-brand-yellow text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Best Value Set</span>
+            <h3 class="text-2xl font-black text-brand-dark">The Complete Guimaras 4-Step Routine</h3>
+            <p class="text-sm text-brand-greyText">Facial Wash + Toner + Moisturizer + SPF 50+ Sunscreen in a custom travel tote bag.</p>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div class="text-right">
+              <span class="line-through text-xs text-brand-greyText">₱696</span>
+              <div class="text-2xl font-extrabold text-brand-dark">₱499</div>
+            </div>
+            <button onclick="addToCart('The Complete Guimaras 4-Step Routine', 499, 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=500&q=80')" class="bg-brand-yellow hover:bg-brand-yellowHover text-white font-bold px-6 py-3 rounded-xl shadow transition-all">
+              Claim Bundle
+            </button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- MEET THE HEAD OF DEPARTMENTS SECTION (Direct Reference to Image 2) -->
+      <section class="bg-brand-cardBg rounded-2xl p-8 md:p-12 border border-brand-greyBorder space-y-8">
+        <h2 class="text-center font-bold text-xl md:text-2xl text-brand-dark tracking-tight">
+          meet the head of departments
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          
+          <!-- Cassey Aliyah Dejumo -->
+          <div class="space-y-4 text-center">
+            <div class="aspect-square bg-stone-300 rounded-xl overflow-hidden shadow-inner relative max-w-xs mx-auto">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Cassey Aliyah Dejumo" class="w-full h-full object-cover grayscale">
+            </div>
+            <div>
+              <h3 class="font-extrabold text-lg text-brand-yellow tracking-wide">Cassey Aliyah Dejumo</h3>
+              <p class="text-xs font-bold text-brand-dark tracking-wider uppercase mb-2">Head of Operations</p>
+              <p class="text-xs text-brand-greyText italic leading-relaxed px-4">
+                "Cassey is in charge of the execution engine of an organization, responsible for turning inputs (materials, time, and labor) into finished goods or services as efficiently and cost-effectively as possible."
+              </p>
+            </div>
+          </div>
+
+          <!-- Jadelynn Arnigo -->
+          <div class="space-y-4 text-center">
+            <div class="aspect-square bg-stone-300 rounded-xl overflow-hidden shadow-inner relative max-w-xs mx-auto">
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80" alt="Jadelynn Arnigo" class="w-full h-full object-cover grayscale">
+            </div>
+            <div>
+              <h3 class="font-extrabold text-lg text-brand-yellow tracking-wide">Jadelynn Arnigo</h3>
+              <p class="text-xs font-bold text-brand-dark tracking-wider uppercase mb-2">Head of Finance</p>
+              <p class="text-xs text-brand-greyText italic leading-relaxed px-4">
+                "Jadelynn is responsible for managing its money, ensuring regulatory compliance, and driving long-term strategic growth."
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- MINIMALIST PRODUCT LINEUP BANNER (Direct Reference to Image 2) -->
+      <section class="bg-stone-200/60 rounded-2xl p-8 border border-brand-greyBorder text-center space-y-6">
+        <p class="text-xs md:text-sm font-semibold tracking-wider text-brand-greyText uppercase">
+          cruelty-free • vegan • gluten-free • dermatologist-tested • available fragrance-free
+        </p>
+
+        <div>
+          <button onclick="scrollToProducts()" class="border border-brand-dark hover:bg-brand-dark hover:text-white transition-all text-xs font-bold tracking-widest uppercase px-6 py-2.5 rounded-full">
+            SHOP THE LINEUP
+          </button>
+        </div>
+
+        <!-- Monochrome Minimalist Packaging Row -->
+        <div class="pt-4 flex items-center justify-center space-x-4 md:space-x-8 opacity-80 overflow-x-auto py-2">
+          <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=300&q=80" alt="Rhode Style Bottle" class="h-28 md:h-36 object-contain grayscale">
+          <img src="https://images.unsplash.com/photo-1608248597309-8b21c435520e?auto=format&fit=crop&w=300&q=80" alt="Rhode Style Bottle" class="h-32 md:h-40 object-contain grayscale">
+          <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=300&q=80" alt="Rhode Style Tube" class="h-28 md:h-36 object-contain grayscale">
+          <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=300&q=80" alt="Rhode Style Tube" class="h-32 md:h-40 object-contain grayscale">
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- TAB 2: ABOUT SECTION -->
+    <!-- ================================================================= -->
+    <div id="tab-content-about" class="tab-pane hidden space-y-12">
+      <div class="bg-brand-cardBg rounded-2xl p-8 md:p-12 border border-brand-greyBorder space-y-8 max-w-4xl mx-auto">
+        
+        <div class="text-center space-y-4">
+          <span class="text-brand-yellow font-extrabold text-sm tracking-widest uppercase">The Elyra Story</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-brand-dark">Sun-Drenched Skin. Effortless Glow.</h2>
+          <p class="text-brand-greyText max-w-2xl mx-auto">Born from the vibrant, golden sweetness of Guimaras Island mangoes, Elyra Skin crafts gentle, high-performance daily skincare specifically formulated for tropical environments.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-brand-greyBorder">
+          <div class="space-y-2 text-center md:text-left">
+            <h3 class="font-bold text-brand-dark">1. Ethically Sourced</h3>
+            <p class="text-xs text-brand-greyText">Directly supporting local Guimaras farming families through fair-trade partnerships.</p>
+          </div>
+          <div class="space-y-2 text-center md:text-left">
+            <h3 class="font-bold text-brand-dark">2. Tropical Breathability</h3>
+            <p class="text-xs text-brand-greyText">Non-greasy, fast-absorbing formulas designed to thrive in extreme humidity.</p>
+          </div>
+          <div class="space-y-2 text-center md:text-left">
+            <h3 class="font-bold text-brand-dark">3. Affordable Clean Beauty</h3>
+            <p class="text-xs text-brand-greyText">Dermatologist-backed formulas without the luxury markup (all essentials ₱149 – ₱199).</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- TAB 3: ACCOUNT SECTION -->
+    <!-- ================================================================= -->
+    <div id="tab-content-account" class="tab-pane hidden space-y-8">
+      <div class="bg-brand-cardBg rounded-2xl p-8 border border-brand-greyBorder max-w-2xl mx-auto space-y-6">
+        
+        <div class="flex items-center justify-between border-b border-brand-greyBorder pb-4">
+          <div>
+            <h2 class="text-xl font-bold text-brand-dark" id="account-name-display">Welcome, Beauty Enthusiast!</h2>
+            <p class="text-xs text-brand-greyText">Manage your profile, saved orders, and Guimaras Rewards points.</p>
+          </div>
+          <span class="bg-brand-yellow text-white text-xs font-bold px-3 py-1 rounded-full uppercase">GOLD MEMBER</span>
+        </div>
+
+        <form onsubmit="saveAccountDetails(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-brand-greyText uppercase mb-1">Full Name</label>
+            <input type="text" id="acc-name" value="Lemuel Santos" class="w-full bg-white border border-brand-greyBorder rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-yellow">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-brand-greyText uppercase mb-1">Email Address</label>
+            <input type="email" id="acc-email" value="lemuel@elyraskin.ph" class="w-full bg-white border border-brand-greyBorder rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-yellow">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-brand-greyText uppercase mb-1">Default Shipping Address</label>
+            <input type="text" id="acc-address" value="Cabuyao City, Calabarzon, Philippines" class="w-full bg-white border border-brand-greyBorder rounded-xl p-3 text-sm focus:outline-none focus:ring-2 focus:ring-brand-yellow">
+          </div>
+
+          <button type="submit" class="w-full bg-brand-dark hover:bg-brand-yellow text-white font-bold py-3 rounded-xl transition-colors">
+            Update Profile
+          </button>
+        </form>
+
+        <div class="pt-4 border-t border-brand-greyBorder flex items-center justify-between text-xs text-brand-greyText">
+          <span>Earned Rewards: <strong class="text-brand-dark">240 Points</strong></span>
+          <button onclick="alert('Rewards redeemed! Check your email for code.')" class="underline hover:text-brand-dark">Redeem ₱100 Voucher</button>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================================================================= -->
+  <!-- CART SLIDE-OUT DRAWER -->
+  <!-- ================================================================= -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0">
+    <!-- Backdrop -->
+    <div onclick="toggleCart()" class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+    
+    <!-- Drawer Panel -->
+    <div class="absolute top-0 right-0 h-full w-full max-w-md bg-brand-bg shadow-2xl flex flex-col justify-between p-6 transform translate-x-full transition-transform duration-300 pointer-events-auto" id="cart-panel">
+      
+      <!-- Cart Header -->
+      <div class="flex items-center justify-between border-b border-brand-greyBorder pb-4">
+        <h3 class="font-extrabold text-xl text-brand-dark">Your Bag</h3>
+        <button onclick="toggleCart()" class="p-2 text-brand-greyText hover:text-brand-dark">
+          <i class="fa-solid fa-xmark text-xl"></i>
+        </button>
+      </div>
+
+      <!-- Free Shipping Progress Bar -->
+      <div class="my-4 bg-brand-cardBg p-3 rounded-xl border border-brand-greyBorder space-y-2">
+        <div class="flex justify-between text-xs font-bold text-brand-dark">
+          <span id="shipping-status-text">Add ₱500 for FREE Shipping</span>
+          <span id="shipping-percent-text">0%</span>
+        </div>
+        <div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
+          <div id="shipping-bar" class="bg-brand-yellow h-full w-0 transition-all duration-300"></div>
+        </div>
+      </div>
+
+      <!-- Cart Items List -->
+      <div id="cart-items-container" class="flex-grow overflow-y-auto space-y-4 my-2 pr-1">
+        <!-- Dynamically Populated -->
+      </div>
+
+      <!-- Cart Footer / Checkout -->
+      <div class="border-t border-brand-greyBorder pt-4 space-y-4">
+        <div class="flex justify-between items-center text-lg font-bold text-brand-dark">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">₱0</span>
+        </div>
+        <button onclick="processCheckout()" class="w-full bg-brand-yellow hover:bg-brand-yellowHover text-white font-bold py-3.5 rounded-xl text-center shadow-md transition-all">
+          Proceed to Checkout
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER (Direct Reference to Image 2) -->
+  <footer class="bg-brand-cardBg border-t border-brand-greyBorder mt-16 pt-12 pb-8 px-4 lg:px-12">
+    <div class="max-w-7xl mx-auto space-y-8">
+      
+      <!-- GIANT YELLOW ELYRA SKIN LOGO (Matching Image 2) -->
+      <div class="text-center py-6 border-b border-brand-greyBorder/60">
+        <div class="flex items-center justify-center space-x-2">
+          <span class="elyra-logo text-6xl md:text-8xl lg:text-9xl uppercase tracking-tighter">ELYRA Skin</span>
+          <span class="text-brand-yellow text-5xl md:text-7xl">🥭</span>
+        </div>
+      </div>
+
+      <!-- Newsletter & Links -->
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-1 text-center md:text-left">
+          <p class="text-xs font-bold text-brand-dark">Join us on the road to an effortless glow.</p>
+          <p class="text-xs text-brand-greyText">Glaze your inbox with tips, tricks & exclusive content from Hailey & Lemuel.</p>
+        </div>
+
+        <!-- Email Subscription Input -->
+        <form onsubmit="subscribeNewsletter(event)" class="flex w-full md:w-auto">
+          <input type="email" required placeholder="Email Address" class="bg-white border border-brand-greyBorder px-4 py-2.5 text-xs rounded-l-xl focus:outline-none focus:ring-1 focus:ring-brand-yellow w-full md:w-64">
+          <button type="submit" class="bg-white border-y border-r border-brand-greyBorder hover:bg-brand-dark hover:text-white px-6 py-2.5 text-xs font-bold uppercase rounded-r-xl transition-colors">
+            SUBSCRIBE
+          </button>
+        </form>
+      </div>
+
+      <div class="text-center text-[10px] text-brand-greyText pt-4">
+        © 2026 ELYRA Skin. All Rights Reserved. Inspired by Rhode Skin Aesthetics & authentic Guimaras mangoes.
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // State management
+    let cart = [];
+
+    // Switch Navigation Tabs (Shop, About, Account)
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.nav-btn').forEach(el => {
+        el.classList.remove('text-brand-dark', 'border-brand-yellow');
+        el.classList.add('text-brand-greyText', 'border-transparent');
+      });
+
+      const selectedTab = document.getElementById(`tab-content-${tabName}`);
+      const selectedNav = document.getElementById(`nav-${tabName}`);
+
+      if(selectedTab) selectedTab.classList.remove('hidden');
+      if(selectedNav) {
+        selectedNav.classList.add('text-brand-dark', 'border-brand-yellow');
+        selectedNav.classList.remove('text-brand-greyText', 'border-transparent');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Scroll to products
+    function scrollToProducts() {
+      switchTab('shop');
+      const section = document.getElementById('products-section');
+      if (section) section.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Cart Drawer Toggle
+    function toggleCart() {
+      const drawer = document.getElementById('cart-drawer');
+      const panel = document.getElementById('cart-panel');
+      
+      if (drawer.classList.contains('pointer-events-none')) {
+        drawer.classList.remove('pointer-events-none', 'opacity-0');
+        panel.classList.remove('translate-x-full');
+      } else {
+        drawer.classList.add('pointer-events-none', 'opacity-0');
+        panel.classList.add('translate-x-full');
+      }
+    }
+
+    // Add Item to Cart
+    function addToCart(title, price, image) {
+      const existing = cart.find(item => item.title === title);
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ title, price, image, qty: 1 });
+      }
+      updateCartUI();
+      toggleCart();
+    }
+
+    // Remove Item
+    function removeFromCart(title) {
+      cart = cart.filter(item => item.title !== title);
+      updateCartUI();
+    }
+
+    // Update Quantity
+    function updateQty(title, change) {
+      const item = cart.find(i => i.title === title);
+      if (item) {
+        item.qty += change;
+        if (item.qty <= 0) removeFromCart(title);
+        else updateCartUI();
+      }
+    }
+
+    // Update Cart UI
+    function updateCartUI() {
+      const container = document.getElementById('cart-items-container');
+      const subtotalEl = document.getElementById('cart-subtotal');
+      const countEl = document.getElementById('cart-count');
+      const shippingBar = document.getElementById('shipping-bar');
+      const shippingStatus = document.getElementById('shipping-status-text');
+      const shippingPercent = document.getElementById('shipping-percent-text');
+
+      let total = 0;
+      let count = 0;
+
+      container.innerHTML = '';
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 text-brand-greyText space-y-2">
+            <i class="fa-solid fa-basket-shopping text-3xl opacity-40"></i>
+            <p class="text-sm">Your bag is empty.</p>
+          </div>
+        `;
+      } else {
+        cart.forEach(item => {
+          total += item.price * item.qty;
+          count += item.qty;
+
+          const itemEl = document.createElement('div');
+          itemEl.className = 'flex items-center justify-between bg-white p-3 rounded-xl border border-brand-greyBorder';
+          itemEl.innerHTML = `
+            <div class="flex items-center space-x-3">
+              <img src="${item.image}" class="w-12 h-12 object-cover rounded-lg bg-stone-100">
+              <div>
+                <h4 class="font-bold text-xs text-brand-dark max-w-[150px] truncate">${item.title}</h4>
+                <span class="text-xs text-brand-greyText">₱${item.price}</span>
+              </div>
+            </div>
+            <div class="flex items-center space-x-2">
+              <button onclick="updateQty('${item.title}', -1)" class="w-6 h-6 bg-stone-100 rounded text-xs font-bold text-brand-dark hover:bg-brand-yellow hover:text-white">-</button>
+              <span class="text-xs font-bold text-brand-dark">${item.qty}</span>
+              <button onclick="updateQty('${item.title}', 1)" class="w-6 h-6 bg-stone-100 rounded text-xs font-bold text-brand-dark hover:bg-brand-yellow hover:text-white">+</button>
+            </div>
+          `;
+          container.appendChild(itemEl);
+        });
+      }
+
+      subtotalEl.innerText = `₱${total}`;
+      countEl.innerText = count;
+
+      // Free shipping calculations (Threshold ₱500)
+      const threshold = 500;
+      const progress = Math.min((total / threshold) * 100, 100);
+      shippingBar.style.width = `${progress}%`;
+      shippingPercent.innerText = `${Math.round(progress)}%`;
+
+      if (total >= threshold) {
+        shippingStatus.innerText = 'You qualify for FREE Shipping!';
+        shippingStatus.classList.add('text-brand-yellow');
+      } else {
+        shippingStatus.innerText = `Add ₱${threshold - total} for FREE Shipping`;
+        shippingStatus.classList.remove('text-brand-yellow');
+      }
+    }
+
+    // Process Checkout Simulation
+    function processCheckout() {
+      if (cart.length === 0) {
+        alert('Your bag is empty! Add products to checkout.');
+        return;
+      }
+      alert('Thank you for shopping with ELYRA Skin! Your order has been placed.');
+      cart = [];
+      updateCartUI();
+      toggleCart();
+    }
+
+    // Save Account Form
+    function saveAccountDetails(e) {
+      e.preventDefault();
+      const name = document.getElementById('acc-name').value;
+      document.getElementById('account-name-display').innerText = `Welcome, ${name}!`;
+      alert('Profile updated successfully!');
+    }
+
+    // Subscribe Newsletter
+    function subscribeNewsletter(e) {
+      e.preventDefault();
+      alert('Thank you for subscribing to ELYRA Skin!');
+      e.target.reset();
+    }
+  </script>
+</body>
+</html>
